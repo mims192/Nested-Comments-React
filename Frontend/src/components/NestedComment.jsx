@@ -9,7 +9,7 @@ function NestedComment({
 }) {
 
     const [comment, setComment] = useState("")
-    const { comments: commentsData,insertComment } = usecommenttree(comments)
+    const { comments: commentsData,insertComment,editComment,deleteComment} = usecommenttree(comments)
     const handleChange = (e) => {
         setComment(e.target.value);
     }
@@ -19,9 +19,22 @@ function NestedComment({
             setComment("")
         }
     }
+
+    //here1
     const handleReply = (commentId,content) => {
-        insertComment(commentId,content)
+        insertComment(commentId,content)//hook
+        onSubmit(content) //will be helpful in shoing popups:like new comment added
     }
+    const handleEdit=(commentId,content)=>{
+        editComment(commentId,content)//hook
+        onEdit(content)
+    }
+    const handleDelete=(commentId)=>{
+        deleteComment(commentId)//hook
+        onDelete(commentId)
+    }
+
+
     return (
         <>
             <div className='flex items-center gap-5 '>
@@ -31,7 +44,7 @@ function NestedComment({
 <div className='bg-blue-100'>
             {commentsData?.map((item) => {
 
-                return <Comment key={item.id} comment={item} onSubmitComment={handleReply} />
+                return <Comment key={item.id} comment={item} onSubmitComment={handleReply} onEditComment={handleEdit} onDeleteComment={handleDelete} />
             })}
             </div>
         </>

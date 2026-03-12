@@ -14,9 +14,9 @@ function App() {
 
         <NestedComment
           comments={commentsData}
-          onSubmit={() => {}}
-          onEdit={() => {}}
-          onDelete={() => {}}
+          onSubmit={(content) => {}}
+          onEdit={(content) => {}}
+          onDelete={(commentId) => {}}
         />
 
       </div>
